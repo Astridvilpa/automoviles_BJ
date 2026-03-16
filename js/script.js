@@ -44,6 +44,43 @@ const CARS = [
     ],
   },
   {
+    id: "Audi",
+    title: "Audi A3 Sportback ambiente 1.6 115cv",
+    brand: "Audi",
+    year: 2005,
+    km: 229000,
+    price: 5500,
+    fuel: "Gasolina",
+    transmission: "Manual",
+    location: "Mora (Toledo)",
+    sold: false,
+    description:
+      `vehículo muy bien cuidado distribución por cadena mantenimiento recién echó aceite más filtros en la compra del vehículo entran 4 neumáticos con sus respectivas llantas que las regalamos
+Extras:
+Asientos calefactable
+Radio CD  audi concert 
+ESP
+Luces automáticas
+Regulador de velocidad
+Porta basos delantero
+Aux
+Elevalunas electrónico
+delantero y traseros
+Itv asta el 2027`,
+    photos: [
+      "img/audi.jpeg",
+      "img/audi1.jpg",
+      "img/audi2.jpg",
+      "img/audi3.jpg",
+      "img/audi4.jpg",
+      "img/audi5.jpg",
+      "img/audi6.jpg",
+      "img/audi7.jpg",
+      "img/audi8.jpg",
+    
+    ],
+  },
+  {
     id: "Volkswagen",
     title: "Volkswagen Golf GTI DSG performance 2.0 230cv",
     brand: "Volkswagen",
