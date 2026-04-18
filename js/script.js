@@ -12,11 +12,11 @@
 
 /* CONFIGURACIÓN DEL NEGOCIO */
 const BUSINESS = {
-  whatsappNumber: "34645723857", 
+  whatsappNumber: "34645723857",
   businessName: "Automóviles B.J.",
   defaultWhatsappMessage:
     "Hola, vengo desde tu web. ¿Podrías darme más información?",
-  email: "davidbejarbravo31@ejemplo.com", 
+  email: "davidbejarbravo31@ejemplo.com",
 };
 
 /* COCHES */
@@ -53,9 +53,8 @@ const CARS = [
     fuel: "Gasolina",
     transmission: "Manual",
     location: "Mora (Toledo)",
-    sold: false,
-    description:
-      `vehículo muy bien cuidado distribución por cadena mantenimiento recién echó aceite más filtros en la compra del vehículo entran 4 neumáticos con sus respectivas llantas que las regalamos
+    sold: true,
+    description: `vehículo muy bien cuidado distribución por cadena mantenimiento recién echó aceite más filtros en la compra del vehículo entran 4 neumáticos con sus respectivas llantas que las regalamos
 Extras:
 Asientos calefactable
 Radio CD  audi concert 
@@ -77,7 +76,6 @@ Itv asta el 2027`,
       "img/audi6.jpg",
       "img/audi7.jpg",
       "img/audi8.jpg",
-    
     ],
   },
   {
@@ -86,7 +84,7 @@ Itv asta el 2027`,
     brand: "Volkswagen",
     year: 2013,
     km: 163000,
-    price: 18000,
+    price: 16800,
     fuel: "Gasolina",
     transmission: "Manual",
     location: "Mora (Toledo)",
@@ -117,7 +115,6 @@ Extras destacados:
       "img/her(7).jpeg",
       "img/herm8.jpeg",
       "img/her9.jpeg",
-
     ],
   },
   {
@@ -184,6 +181,66 @@ Extras destacados:
       "Vehículo utilitario ideal para el día a día, con motor en perfecto estado y revisiones al día. Vehículo nacional, de único propietario y con un consumo muy económico.",
     photos: ["img/bmw.jpeg"],
   },
+  {
+    id: "Audi Q5",
+    title: "Audi Q5 Stronic 4x4",
+    brand: "Audi",
+    year: 2009,
+    km: 250000,
+    price: 11500,
+    fuel: "Gasolina",
+    transmission: "Automático",
+    location: "Mora (Toledo)",
+    sold: false,
+    description: `Disponemos en ocasión de este Audi Q5 en excelente estado, muy bien cuidado.
+Vehículo de dos propietarios (uso familiar), con mantenimiento realizado en servicio oficial Audi, lo que garantiza su buen estado mecánico.
+
+Cuenta con todos los extras, excepto techo solar.
+Vehículo nacional, listo para disfrutar desde el primer día.
+
+✔️ 1 año de garantía incluido  
+✔️ Entrega inmediata`,
+    photos: [
+      "img/q5.jpeg",
+      "img/q51.jpeg",
+      "img/q53.jpeg",
+      "img/q54.jpeg",
+      "img/q55.jpeg",
+      "img/q56.jpeg",
+      "img/q57.jpeg",
+      "img/q58.jpeg",
+      "img/q59.jpeg",
+      "img/q510.jpeg",
+      "img/q511.jpeg",
+      "img/q512.jpeg",
+    ],
+  },
+   {
+    id: "peugeot208",
+    title: "Peugeot 208 1.2 110 cv",
+    brand: "Peugeot",
+    year: 2016,
+    km: 103000,
+    price: 7500,
+    fuel: "Gasolina",
+    transmission: "Manual",
+    location: "Mora (Toledo)",
+    sold: true,
+    description:
+      "Coche perfecto para circular tanto en ciudad como en carretera. Vehículo muy económico y de bajo consumo, con distribución, aceite y filtros recién hechos. ITV en vigor hasta 2027.",
+    photos: [
+      "img/peugeot1.jpeg",
+      "img/peu2.jpeg",
+      "img/peu3.jpeg",
+      "img/peu4.jpeg",
+      "img/peu5.jpeg",
+      "img/peu6.jpeg",
+      "img/peu7.jpeg",
+      "img/peu8.jpeg",
+      "img/peu9.jpeg",
+      "img/peu10.jpeg",
+    ],
+  },
 ];
 
 /* UTILIDADES */
@@ -225,9 +282,7 @@ function buildMailto(to, subject, body) {
 /* TEMPLATE DE CARD */
 function carTemplate(car) {
   const firstPhoto = car.photos && car.photos.length ? car.photos[0] : "";
-  const badge = car.sold
-    ? `<div class="vcard__badge">VENDIDO</div>`
-    : "";
+  const badge = car.sold ? `<div class="vcard__badge">VENDIDO</div>` : "";
 
   const msg = `Hola, me interesa este coche: ${car.title} (${car.year}) - ${formatEuro(car.price)}. ¿Sigue disponible?`;
 
@@ -365,7 +420,9 @@ function renderCars(filteredCars = CARS) {
 function applyFilters() {
   const brand = qs("#brandSelect")?.value.toLowerCase() || "";
   const fuel = qs("#fuelSelect")?.value.toLowerCase() || "";
-  const price = qs("#priceSelect")?.value ? Number(qs("#priceSelect").value) : null;
+  const price = qs("#priceSelect")?.value
+    ? Number(qs("#priceSelect").value)
+    : null;
   const query = qs("#q")?.value.toLowerCase().trim() || "";
 
   const filtered = CARS.filter((car) => {
@@ -373,7 +430,8 @@ function applyFilters() {
     const matchesFuel = !fuel || car.fuel.toLowerCase() === fuel;
     const matchesPrice = !price || car.price <= price;
 
-    const text = `${car.title} ${car.brand} ${car.year} ${car.fuel}`.toLowerCase();
+    const text =
+      `${car.title} ${car.brand} ${car.year} ${car.fuel}`.toLowerCase();
     const matchesQuery = !query || text.includes(query);
 
     return matchesBrand && matchesFuel && matchesPrice && matchesQuery;
