@@ -57,7 +57,7 @@ const CARS = [
     description: `vehículo muy bien cuidado distribución por cadena mantenimiento recién echó aceite más filtros en la compra del vehículo entran 4 neumáticos con sus respectivas llantas que las regalamos
 Extras:
 Asientos calefactable
-Radio CD  audi concert 
+Radio CD audi concert
 ESP
 Luces automáticas
 Regulador de velocidad
@@ -198,7 +198,7 @@ Vehículo de dos propietarios (uso familiar), con mantenimiento realizado en ser
 Cuenta con todos los extras, excepto techo solar.
 Vehículo nacional, listo para disfrutar desde el primer día.
 
-✔️ 1 año de garantía incluido  
+✔️ 1 año de garantía incluido
 ✔️ Entrega inmediata`,
     photos: [
       "img/q5.jpeg",
@@ -215,7 +215,7 @@ Vehículo nacional, listo para disfrutar desde el primer día.
       "img/q512.jpeg",
     ],
   },
-   {
+  {
     id: "Renault megane cabrio",
     title: "Renault Megane Cabrio 1.5 105cv",
     brand: "Renault",
@@ -242,7 +242,7 @@ Vehículo nacional, listo para disfrutar desde el primer día.
       "img/megan12.jpeg",
     ],
   },
-   {
+  {
     id: "Volkswagen Golf",
     title: "Volkswagen Golf 1.6 100cv",
     brand: "Volkswagen",
@@ -260,7 +260,7 @@ Vehículo nacional, listo para disfrutar desde el primer día.
       "img/w2.jpeg",
       "img/w3.jpeg",
       "img/w4.jpeg",
-      "img/w5.jpeg",,
+      "img/w5.jpeg",
       "img/w6.jpeg",
       "img/w7.jpeg",
       "img/w8.jpeg",
@@ -432,16 +432,20 @@ function renderCars(filteredCars = CARS) {
   const grid = qs("#carsGrid");
   if (!grid) return;
 
-  grid.innerHTML = filteredCars.map(carTemplate).join("");
+  const sortedCars = [...filteredCars].sort(
+    (a, b) => Number(a.sold) - Number(b.sold)
+  );
 
-  filteredCars.forEach((car) => {
+  grid.innerHTML = sortedCars.map(carTemplate).join("");
+
+  sortedCars.forEach((car) => {
     const el = qs(`[data-car-id="${CSS.escape(car.id)}"]`);
     if (el) mountCardInteractions(el, car);
   });
 
   const statCars = qs("#statCars");
   if (statCars) {
-    const availableCars = filteredCars.filter((car) => !car.sold);
+    const availableCars = sortedCars.filter((car) => !car.sold);
     statCars.textContent = String(availableCars.length);
   }
 }
